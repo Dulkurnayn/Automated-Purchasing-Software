@@ -1,0 +1,192 @@
+
+from PIL import Image
+myImage = Image.open("testpic.png")
+
+def find_turq_pixels(image_name):
+
+    # Set the value you want for these variables
+    r_min = 0
+    r_max = 65
+    g_min = 220
+    g_max = 255
+    b_min = 220
+    b_max = 255
+
+    turq_pixels = set()
+
+    img = Image.open(image_name)
+    rgb = img.convert('rgb')
+    for x in range(img.size[0]):
+        for y in range(img.size[1]):
+            r, g, b = rgb.getpixel((x, y))
+            if r >= r_min and r <= r_max and b >= b_min and b <= b_max and g >= g_min and g <= g_max:
+                turq_pixels.add((x,y))
+
+    return turq_pixels
+
+class login(customtkinter.CTk):
+    def __init__():
+        super().__init__()
+
+
+        customtkinter.set_appearance_mode("System")  # Modes: system (default), light, dark
+        customtkinter.set_default_color_theme("blue")  # Themes: blue (default), dark-blue, green
+
+        def dashboard():
+            logingui.destroy()
+                    #app_instance = App()
+                #app_instance.mainloop()
+                    
+            #mainv3.App.mainloop(customtkinter.CTk)
+            with open("mainv4.py") as f:
+                exec(f.read())
+        def passwordreset(): 
+            global username ,email
+
+            x= open("create.txt" ,"r")
+            # Read the lines
+            print("helle")
+            user=username.get()
+            email=email.get()
+            with open("create.txt", "r") as x:
+                line = x.readline()
+                login_info = line.split()
+                #print(login_info)
+                if login_info[1] == user :
+                    print("elle")
+            
+                # Email configuration
+                    sender_email = "17mshakil@stmargaretsacademy.com"
+                    sender_password = "kinglord1"
+                    subject = "Password Reset Request"
+
+                    # Create message
+                    message = MIMEMultipart()
+                    message["From"] = sender_email
+                    message["To"] = email
+                    message["Subject"] = subject
+
+                    # Email body
+                    body = "Click the link below to reset your password:\n\n" \
+                        "http://example.com/reset_password?token=your_reset_token"
+
+                    message.attach(MIMEText(body, "plain"))
+
+                    # Connect to the SMTP server (Gmail example)
+                    with smtplib.SMTP("smtp.outlook.com", 587) as server:
+                        server.starttls()
+                        server.login(sender_email, sender_password)
+
+                        # Send email
+                        server.sendmail(sender_email, email, message.as_string())
+
+                    # Example usage
+                    
+                else:
+                        print("An error occurred:")
+
+            
+        def log_in(event=None):
+        # destroy current window and create a new on
+            global password,username,frame
+            
+            pas=password.get()
+            user=username.get()
+            #x= open("create.txt" ,"a")
+
+            
+            mac = getmac.get_mac_address()
+            print(mac)
+            #x.write(str(pas+" " + user)+"\n")
+            #x.close()
+            x= open("create.txt" ,"r")
+            
+            with open("create.txt", "r") as x:
+                line = x.readline()
+                login_info = line.split()
+                print(login_info)
+        # Read the lines
+            
+                
+                print(login_info)
+                x.close# Split on the space, and store the results in a list of two strings
+                    
+                if pas== login_info[0] and user == login_info[1] and mac == login_info[2] :
+                    frame.destroy()
+                    frame = customtkinter.CTkFrame(master=l1, width=320, height=360, corner_radius=15, fg_color="transparent")
+                    frame.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+                    widget=customtkinter.CTkLabel(master=frame, text="LOG IN", font=('Century Gothic', 20))
+                    widget.place(x=120, y=45)
+                    dashboard()
+                    
+                    
+                else:    
+                    username.delete(0, last_index=10)
+                    password.delete(0, last_index=10)
+
+        def signup_function():
+            logingui.destroy()
+            signup_window = customtkinter.CTk()
+            signup_window.geometry("600x440")
+            signup_window.title('Sign Up')
+            username = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Username')
+            username.place(x=50, y=110)
+
+            password = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Password', show="*")
+            password.place(x=50, y=165)
+
+            email = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Email')
+            email.place(x=50, y=220)
+
+            # Add signup window UI components here (similar to the login window)
+
+            signup_window.mainloop()
+        def load_image(image_path):
+            try:
+                img = Image.open(image_path)
+                return img
+            except Exception as e:
+                print(f"Error opening image: {e}")
+                return None
+
+
+        logingui = customtkinter.CTk()  # creating custom tkinte r window
+        logingui.geometry("1920x1248")
+        logingui.title('Login')
+
+       # img1 = ImageTk.PhotoImage( load_image("./assets/pattern.png"))
+        img1 = ImageTk.PhotoImage( load_image("./assets/pattern12.png"))
+        image_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), "test_images")
+        self.image1= customtkinter.CTkImage(Image.open(os.path.join(image_path, "pattern12.png")), size=(26, 26))
+
+        
+
+        l1 = customtkinter.CTkLabel(master=logingui, image=self.image1)
+        l1.pack()
+
+        # Creating frame usingcutom  tkinter and tkinter
+        frame = customtkinter.CTkFrame(master=l1, width=320, height=360, corner_radius=15, fg_color="transparent")
+        frame.place(relx=0.5, rely=0.5, anchor=tkinter.CENTER)
+
+        l2 = customtkinter.CTkLabel(master=frame, text="LOG IN", font=('Century Gothic', 20))
+        l2.place(x=120, y=45)
+
+        username = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Username')
+        username.place(x=50, y=110)
+
+        password = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Password', show="*")
+        password.place(x=50, y=165)
+
+        email = customtkinter.CTkEntry(master=frame, width=220, placeholder_text='Email')
+        email.place(x=50, y=220)
+
+        #command=passwordreset(recieveremail)
+        resetpass_button = customtkinter.CTkButton(master=frame, text="Forget password?",command=passwordreset ,font=('Century Gothic', 12, ['bold']),fg_color="transparent",hover_color="gray25" ) 
+        resetpass_button.place(x=130, y=250)
+
+        login_button = customtkinter.CTkButton(master=frame, width=220, text="Login", command=log_in, corner_radius=6)
+        login_button.place(x=50, y=290)
+
+        signup_button = customtkinter.CTkButton(master=frame, width=220, text="Sign Up", command=signup_function, corner_radius=6)
+        signup_button.place(x=50, y=330)
+        logingui.bind('<Return>', log_in)
