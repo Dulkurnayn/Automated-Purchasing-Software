@@ -34,8 +34,8 @@ def passwordreset():
             print("elle")
     
         # Email configuration
-            sender_email = "17mshakil@stmargaretsacademy.com"
-            sender_password = "kinglord1"
+            sender_email = "......."
+            sender_password = "....."
             subject = "Password Reset Request"
 
             # Create message
